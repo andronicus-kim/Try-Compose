@@ -16,3 +16,4 @@ rootProject.name = "Try Compose"
 include ':app'
 include ':rowscolumssizing'
 include ':core'
+include ':modifiers'
