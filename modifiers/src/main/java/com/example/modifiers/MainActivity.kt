@@ -5,8 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
@@ -30,7 +33,10 @@ class MainActivity : ComponentActivity() {
                     .background(Color.Green)
                     .padding(top = 10.dp, start = 16.dp)
             ){
-                Text(text = "Hello")
+                Text(text = "Hello", modifier = Modifier
+                    .offset(0.dp,50.dp))
+                Spacer(modifier = Modifier
+                    .height(150.dp))
                 Text(text = "Word")
             }
         }
