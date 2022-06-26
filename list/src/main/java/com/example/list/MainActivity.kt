@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -29,9 +30,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LazyColumn() {
-                items(5000) {
+                itemsIndexed(listOf(1,2,3,4,5,6,7,8,9,11,12,13,11)) { index, item ->
                     Text(
-                        text = "Item $it",
+                        text = "Item at $index is $item",
                         textAlign = TextAlign.Center,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
@@ -40,6 +41,17 @@ class MainActivity : ComponentActivity() {
                             .fillMaxWidth()
                     )
                 }
+//                items(5000) {
+//                    Text(
+//                        text = "Item $it",
+//                        textAlign = TextAlign.Center,
+//                        fontSize = 30.sp,
+//                        fontWeight = FontWeight.Bold,
+//                        modifier = Modifier
+//                            .padding(vertical = 16.dp)
+//                            .fillMaxWidth()
+//                    )
+//                }
 
             }
         }
