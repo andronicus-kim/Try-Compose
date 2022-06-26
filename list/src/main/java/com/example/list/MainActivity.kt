@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateSizeAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
@@ -42,7 +43,12 @@ class MainActivity : ComponentActivity() {
             var boxSizeState by remember {
                 mutableStateOf(200.dp)
             }
-            val animatedSize by animateDpAsState(targetValue = boxSizeState)
+            val animatedSize by animateDpAsState(
+                targetValue = boxSizeState,
+                tween(
+                    durationMillis = 1000
+                )
+            )
                 Box(
                     modifier = Modifier
                         .size(animatedSize)
