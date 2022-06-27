@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class Circularprogress : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -39,47 +39,46 @@ class Circularprogress : ComponentActivity() {
             }
         }
     }
-
-    @Composable
-    fun CircularProgressBar(
-        percentage: Float,
-        number: Int,
-        strokeWidth: Dp = 2.dp,
-        fontSize: TextUnit = 28.sp,
-        radius: Dp = 50.dp,
-        color: Color = Color.Green,
-        animationDelay: Int = 0,
-        animationDuration: Int = 1000
-    ) {
-        var animationPlayed by remember {
-            mutableStateOf(false)
-        }
-        val animateFloat by animateFloatAsState(
-            targetValue = if (animationPlayed) percentage else 0f,
-            animationSpec = tween(
-                durationMillis = animationDuration,
-                delayMillis = animationDelay
-            )
+}
+@Composable
+fun CircularProgressBar(
+    percentage: Float,
+    number: Int,
+    strokeWidth: Dp = 8.dp,
+    fontSize: TextUnit = 28.sp,
+    radius: Dp = 50.dp,
+    color: Color = Color.Green,
+    animationDelay: Int = 0,
+    animationDuration: Int = 3000
+) {
+    var animationPlayed by remember {
+        mutableStateOf(false)
+    }
+    val animateFloat by animateFloatAsState(
+        targetValue = if (animationPlayed) percentage else 0f,
+        animationSpec = tween(
+            durationMillis = animationDuration,
+            delayMillis = animationDelay
         )
-        LaunchedEffect(key1 = true) {
-            animationPlayed = true
-        }
-        Box(modifier = Modifier.size(radius * 2f), contentAlignment = Alignment.Center) {
-            Canvas(modifier = Modifier.size(radius * 2f)) {
-                drawArc(
-                    color,
-                    -90f,
-                    360 * percentage,
-                    false,
-                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-                )
-            }
-            Text(
-                text = (number * percentage).toInt().toString(),
-                fontSize = fontSize,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+    )
+    LaunchedEffect(key1 = true) {
+        animationPlayed = true
+    }
+    Box(modifier = Modifier.size(radius * 2f), contentAlignment = Alignment.Center) {
+        Canvas(modifier = Modifier.size(radius * 2f)) {
+            drawArc(
+                color,
+                -90f,
+                360 * animateFloat,
+                false,
+                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
         }
+        Text(
+            text = (number * percentage).toInt().toString(),
+            fontSize = fontSize,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
     }
 }
